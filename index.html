@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
@@ -41,7 +40,7 @@ body{
   font-weight:bold;
 }
 
-/* Grid */
+/* Products */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -97,7 +96,7 @@ button{
   display:none;
 }
 
-/* Product Details */
+/* Details */
 .details-page{
   padding:40px;
   text-align:center;
@@ -109,6 +108,7 @@ button{
   margin-bottom:20px;
 }
 
+/* Checkout */
 .checkout{
   padding:40px;
 }
@@ -126,7 +126,6 @@ button{
   color:#00ff88;
   font-weight:bold;
 }
-
 </style>
 </head>
 
@@ -134,14 +133,16 @@ button{
 
 <div class="navbar">
   <div class="logo">WDZ STORE</div>
-  <div class="cart" onclick="showCheckout()">🛒 السلة (<span id="cartCount">0</span>)</div>
+  <div class="cart" onclick="showCheckout()">
+    🛒 السلة (<span id="cartCount">0</span>)
+  </div>
 </div>
 
 <!-- PRODUCTS -->
 <div id="home" class="products">
 
   <div class="card">
-    <img src="black.jpg">
+    <img src="black.jpg" alt="TSHIRT BLACK">
     <h3>TSHIRT BLACK</h3>
     <div class="price">980 ر.س</div>
     <button class="add" onclick="addToCart('TSHIRT BLACK',980)">أضف للسلة</button>
@@ -149,7 +150,7 @@ button{
   </div>
 
   <div class="card">
-    <img src="white.jpg">
+    <img src="white.jpg" alt="TSHIRT WHITE">
     <h3>TSHIRT WHITE</h3>
     <div class="price">850 ر.س</div>
     <button class="add" onclick="addToCart('TSHIRT WHITE',850)">أضف للسلة</button>
@@ -158,94 +159,14 @@ button{
 
 </div>
 
-<!-- DETAILS PAGE -->
+<!-- DETAILS -->
 <div id="detailsPage" class="details-page hidden"></div>
 
 <!-- CHECKOUT -->
 <div id="checkoutPage" class="checkout hidden"></div>
 
-<script>
-
-let cart = [];
-
-function updateCartCount(){
-  document.getElementById("cartCount").innerText =
-  cart.reduce((total,item)=> total + item.quantity ,0);
-}
-
-function addToCart(name,price){
-
-  let existing = cart.find(item => item.name === name);
-
-  if(existing){
-    existing.quantity++;
-  }else{
-    cart.push({name,price,quantity:1});
-  }
-
-  updateCartCount();
-  alert("تمت الإضافة للسلة 🛒");
-}
-
-function showDetails(name,img,price){
-
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("checkoutPage").classList.add("hidden");
-
-  let page = document.getElementById("detailsPage");
-  page.classList.remove("hidden");
-
-  page.innerHTML = `
-    <img src="${img}">
-    <h2>${name}</h2>
-    <div class="price">${price} ر.س</div>
-    <button class="add" onclick="addToCart('${name}',${price})">أضف للسلة</button>
-    <button class="details" onclick="goHome()">رجوع</button>
-  `;
-}
-
-function goHome(){
-  document.getElementById("home").classList.remove("hidden");
-  document.getElementById("detailsPage").classList.add("hidden");
-  document.getElementById("checkoutPage").classList.add("hidden");
-}
-
-function showCheckout(){
-
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("detailsPage").classList.add("hidden");
-
-  let page = document.getElementById("checkoutPage");
-  page.classList.remove("hidden");
-
-  if(cart.length === 0){
-    page.innerHTML = "<h2>السلة فارغة</h2><button onclick='goHome()'>رجوع</button>";
-    return;
-  }
-
-  let total = 0;
-  let html = "<h2>السلة</h2>";
-
-  cart.forEach(item=>{
-    total += item.price * item.quantity;
-    html += `
-      <div class="checkout-item">
-        ${item.name} × ${item.quantity}
-        <br>
-        ${item.price * item.quantity} ر.س
-      </div>
-    `;
-  });
-
-  html += `<div class="total">المجموع: ${total} ر.س</div>
-           <button onclick="goHome()">متابعة التسوق</button>`;
-
-  page.innerHTML = html;
-}
-
-updateCartCount();
-
-</script>
+<!-- ربط ملف الجافاسكربت -->
+<script src="main.js"></script>
 
 </body>
 </html>
