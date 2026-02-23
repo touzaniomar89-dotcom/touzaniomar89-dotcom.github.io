@@ -7,59 +7,107 @@
 
 <style>
 body{
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-text-align:center;
-padding:40px;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0a0a0a;
+  color:white;
 }
 
-.product-box{
-background:#111;
-padding:30px;
-border-radius:12px;
-max-width:400px;
-margin:auto;
-box-shadow:0 0 20px rgba(0,255,100,0.1);
+/* Navbar */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:#111;
+  border-bottom:1px solid #222;
 }
 
-h1{
-margin-bottom:40px;
+.logo{
+  font-size:20px;
+  font-weight:bold;
+  color:#00ff88;
+}
+
+.cart-btn{
+  background:#00ff88;
+  color:black;
+  border:none;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* Product */
+.container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:80vh;
+}
+
+.product{
+  background:#111;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  width:350px;
+  box-shadow:0 0 25px rgba(0,255,100,0.1);
+}
+
+.product h2{
+  margin-bottom:10px;
 }
 
 .price{
-color:#00ff66;
-font-size:20px;
-margin:15px 0;
+  color:#00ff88;
+  font-size:18px;
+  margin:15px 0;
 }
 
 button{
-background:#00ff66;
-border:none;
-padding:12px;
-width:100%;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-font-size:16px;
+  background:#00ff88;
+  border:none;
+  padding:12px;
+  width:100%;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 button:hover{
-background:#00cc52;
+  background:#00cc52;
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  padding:20px;
+  background:#111;
+  border-top:1px solid #222;
+  font-size:13px;
+  color:#888;
 }
 </style>
 </head>
 <body>
 
-<h1>WDZ STORE</h1>
+<div class="navbar">
+  <div class="logo">WDZ STORE</div>
+  <button class="cart-btn" onclick="goToCheckout()">🛒 السلة</button>
+</div>
 
-<div class="product-box">
+<div class="container">
+  <div class="product">
+    <h2>2 TSHIRT BLACK</h2>
+    <p class="price">980 ر.س</p>
+    <button onclick="goToCheckout()">اطلب الآن</button>
+  </div>
+</div>
 
-<h2>TSHIRT BLACK 2</h2>
-<p class="price">السعر: 980 ر.س</p>
-
-<button onclick="goToCheckout()">اطلب الآن</button>
-
+<div class="footer">
+  © 2026 WDZ STORE - جميع الحقوق محفوظة
 </div>
 
 <script>
