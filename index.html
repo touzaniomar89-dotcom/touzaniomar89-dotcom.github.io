@@ -132,19 +132,24 @@ body{
 
 <body>
 
-<div class="navbar">
-  <div class="logo">WDZ STORE</div>
-  <button class="cart-btn" onclick="goToCheckout()">
-    🛒 السلة
-  </button>
-</div>
-
 <div class="container">
+
   <div class="product">
+    <img src="black.jpg" class="product-img">
     <h2>2 TSHIRT BLACK</h2>
     <div class="price">980 ر.س</div>
-    <button class="buy-btn" onclick="orderNow()">اطلب الآن</button>
+    <button class="buy-btn" onclick="addToCart('2 TSHIRT BLACK',980)">أضف للسلة</button>
+    <button class="details-btn" onclick="goToDetails('black')">عرض التفاصيل</button>
   </div>
+
+  <div class="product">
+    <img src="white.jpg" class="product-img">
+    <h2>TSHIRT WHITE</h2>
+    <div class="price">850 ر.س</div>
+    <button class="buy-btn" onclick="addToCart('TSHIRT WHITE',850)">أضف للسلة</button>
+    <button class="details-btn" onclick="goToDetails('white')">عرض التفاصيل</button>
+  </div>
+
 </div>
 
 <div class="footer">
