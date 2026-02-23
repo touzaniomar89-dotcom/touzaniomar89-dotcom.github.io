@@ -9,122 +9,122 @@
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Cairo', sans-serif;
-  background: linear-gradient(135deg, #000000, #0f0f0f, #111);
+  font-family:'Cairo',sans-serif;
+  background:#0f0f0f;
   color:white;
-  min-height:100vh;
 }
 
 /* Navbar */
-
 .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:20px 40px;
-  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:#000;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:700;
   color:#00ff88;
-  letter-spacing:2px;
+  font-size:22px;
+  font-weight:bold;
 }
 
-.cart-btn{
-  background: linear-gradient(45deg,#00ff88,#00cc66);
-  border:none;
-  padding:10px 18px;
-  border-radius:12px;
-  font-weight:bold;
+.cart{
   cursor:pointer;
+  background:#00ff88;
+  color:black;
+  padding:8px 15px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* Grid */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  padding:40px;
+}
+
+.card{
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
   transition:0.3s;
 }
 
-.cart-btn:hover{
-  transform:scale(1.05);
+.card:hover{
+  transform:translateY(-5px);
 }
 
-/* Container */
-
-.container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:80vh;
-  animation:fadeIn 1.2s ease;
-}
-
-/* Product Card */
-
-.product{
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(10px);
-  border-radius:20px;
-  padding:50px;
-  text-align:center;
-  box-shadow:0 0 40px rgba(0,255,120,0.08);
-  transition:0.4s;
-  width:350px;
-}
-
-.product:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 60px rgba(0,255,120,0.2);
-}
-
-.product h2{
-  margin-bottom:20px;
-  font-size:24px;
+.card img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 
 .price{
   color:#00ff88;
-  font-size:20px;
-  margin-bottom:30px;
+  margin:10px 0;
   font-weight:bold;
 }
 
-/* Button */
-
-.buy-btn{
-  background: linear-gradient(45deg,#00ff88,#00cc66);
+button{
+  padding:10px;
   border:none;
-  padding:14px;
+  border-radius:8px;
+  margin:5px 0;
   width:100%;
-  border-radius:12px;
-  font-weight:bold;
   cursor:pointer;
-  transition:0.3s;
+  font-weight:bold;
 }
 
-.buy-btn:hover{
-  transform:scale(1.05);
+.add{
+  background:#00ff88;
+  color:black;
 }
 
-/* Footer */
+.details{
+  background:#333;
+  color:white;
+}
 
-.footer{
+.hidden{
+  display:none;
+}
+
+/* Product Details */
+.details-page{
+  padding:40px;
   text-align:center;
-  padding:20px;
-  border-top:1px solid rgba(255,255,255,0.05);
-  color:#888;
-  font-size:14px;
 }
 
-/* Animation */
+.details-page img{
+  width:300px;
+  border-radius:15px;
+  margin-bottom:20px;
+}
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+.checkout{
+  padding:40px;
+}
+
+.checkout-item{
+  background:#1a1a1a;
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:10px;
+}
+
+.total{
+  margin-top:20px;
+  font-size:18px;
+  color:#00ff88;
+  font-weight:bold;
 }
 
 </style>
@@ -132,56 +132,118 @@ body{
 
 <body>
 
-<div class="container">
+<div class="navbar">
+  <div class="logo">WDZ STORE</div>
+  <div class="cart" onclick="showCheckout()">🛒 السلة (<span id="cartCount">0</span>)</div>
+</div>
 
-  <div class="product">
-    <img src="black.jpg" class="product-img">
-    <h2>2 TSHIRT BLACK</h2>
+<!-- PRODUCTS -->
+<div id="home" class="products">
+
+  <div class="card">
+    <img src="black.jpg">
+    <h3>TSHIRT BLACK</h3>
     <div class="price">980 ر.س</div>
-    <button class="buy-btn" onclick="addToCart('2 TSHIRT BLACK',980)">أضف للسلة</button>
-    <button class="details-btn" onclick="goToDetails('black')">عرض التفاصيل</button>
+    <button class="add" onclick="addToCart('TSHIRT BLACK',980)">أضف للسلة</button>
+    <button class="details" onclick="showDetails('TSHIRT BLACK','black.jpg',980)">عرض التفاصيل</button>
   </div>
 
-  <div class="product">
-    <img src="white.jpg" class="product-img">
-    <h2>TSHIRT WHITE</h2>
+  <div class="card">
+    <img src="white.jpg">
+    <h3>TSHIRT WHITE</h3>
     <div class="price">850 ر.س</div>
-    <button class="buy-btn" onclick="addToCart('TSHIRT WHITE',850)">أضف للسلة</button>
-    <button class="details-btn" onclick="goToDetails('white')">عرض التفاصيل</button>
+    <button class="add" onclick="addToCart('TSHIRT WHITE',850)">أضف للسلة</button>
+    <button class="details" onclick="showDetails('TSHIRT WHITE','white.jpg',850)">عرض التفاصيل</button>
   </div>
 
 </div>
 
-<div class="footer">
-  © 2026 WDZ STORE - جميع الحقوق محفوظة
-</div>
+<!-- DETAILS PAGE -->
+<div id="detailsPage" class="details-page hidden"></div>
+
+<!-- CHECKOUT -->
+<div id="checkoutPage" class="checkout hidden"></div>
 
 <script>
 
-function orderNow(){
+let cart = [];
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function updateCartCount(){
+  document.getElementById("cartCount").innerText =
+  cart.reduce((total,item)=> total + item.quantity ,0);
+}
 
-  let existing = cart.find(item => item.name === "2 TSHIRT BLACK");
+function addToCart(name,price){
+
+  let existing = cart.find(item => item.name === name);
 
   if(existing){
-    existing.quantity += 1;
-  } else {
-    cart.push({
-      name: "2 TSHIRT BLACK",
-      price: 980,
-      quantity: 1
-    });
+    existing.quantity++;
+  }else{
+    cart.push({name,price,quantity:1});
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  window.location.href = "checkout.html";
+  updateCartCount();
+  alert("تمت الإضافة للسلة 🛒");
 }
 
-function goToCheckout(){
-  window.location.href = "checkout.html";
+function showDetails(name,img,price){
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("checkoutPage").classList.add("hidden");
+
+  let page = document.getElementById("detailsPage");
+  page.classList.remove("hidden");
+
+  page.innerHTML = `
+    <img src="${img}">
+    <h2>${name}</h2>
+    <div class="price">${price} ر.س</div>
+    <button class="add" onclick="addToCart('${name}',${price})">أضف للسلة</button>
+    <button class="details" onclick="goHome()">رجوع</button>
+  `;
 }
+
+function goHome(){
+  document.getElementById("home").classList.remove("hidden");
+  document.getElementById("detailsPage").classList.add("hidden");
+  document.getElementById("checkoutPage").classList.add("hidden");
+}
+
+function showCheckout(){
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("detailsPage").classList.add("hidden");
+
+  let page = document.getElementById("checkoutPage");
+  page.classList.remove("hidden");
+
+  if(cart.length === 0){
+    page.innerHTML = "<h2>السلة فارغة</h2><button onclick='goHome()'>رجوع</button>";
+    return;
+  }
+
+  let total = 0;
+  let html = "<h2>السلة</h2>";
+
+  cart.forEach(item=>{
+    total += item.price * item.quantity;
+    html += `
+      <div class="checkout-item">
+        ${item.name} × ${item.quantity}
+        <br>
+        ${item.price * item.quantity} ر.س
+      </div>
+    `;
+  });
+
+  html += `<div class="total">المجموع: ${total} ر.س</div>
+           <button onclick="goHome()">متابعة التسوق</button>`;
+
+  page.innerHTML = html;
+}
+
+updateCartCount();
 
 </script>
 
