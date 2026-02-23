@@ -6,6 +6,9 @@ function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+function goToCheckout() {
+    window.location.href = "checkout.html";
+}
 // تحديث عداد السلة في النافبار
 function updateCartCount() {
     const count = document.getElementById("cartCount");
