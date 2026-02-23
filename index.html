@@ -102,7 +102,7 @@ button:hover{
   <div class="product">
     <h2>2 TSHIRT BLACK</h2>
     <p class="price">980 ر.س</p>
-    <button onclick="goToCheckout()">اطلب الآن</button>
+    <button onclick="orderNow()">اطلب الآن</button>
   </div>
 </div>
 
@@ -111,10 +111,32 @@ button:hover{
 </div>
 
 <script>
+
+function orderNow(){
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let existing = cart.find(item => item.name === "2 TSHIRT BLACK");
+
+  if(existing){
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      name: "2 TSHIRT BLACK",
+      price: 980,
+      quantity: 1
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  window.location.href = "checkout.html";
+}
+
 function goToCheckout(){
   window.location.href = "checkout.html";
 }
-</script>
 
+</script>
 </body>
 </html>
