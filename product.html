@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تفاصيل المنتج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Cairo';background:#111;color:white;padding:50px;}
+.container{display:flex;gap:50px;align-items:center;}
+img{width:350px;border-radius:15px;}
+button{background:#00ff88;border:none;padding:15px;border-radius:10px;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img id="img">
+  <div>
+    <h2 id="name"></h2>
+    <h3 id="price"></h3>
+    <button onclick="buyNow()">شراء الآن</button>
+  </div>
+</div>
+
+<script>
+const products={
+  black:{name:"2 TSHIRT BLACK",price:980,img:"black.jpg"},
+  white:{name:"TSHIRT WHITE",price:850,img:"white.jpg"}
+};
+const id=new URLSearchParams(window.location.search).get("id");
+const p=products[id];
+document.getElementById("name").innerText=p.name;
+document.getElementById("price").innerText=p.price+" ر.س";
+document.getElementById("img").src=p.img;
+
+function buyNow(){
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ cart.push({name:p.name,price:p.price,quantity:1});
+ localStorage.setItem("cart",JSON.stringify(cart));
+ window.location.href="checkout.html";
+}
+</script>
+
+</body>
+</html>
