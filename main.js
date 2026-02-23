@@ -134,3 +134,60 @@ function completeOrder() {
 document.addEventListener("DOMContentLoaded", function () {
     updateCartCount();
 });
+
+// عرض السلة في صفحة checkout
+function loadCheckoutPage() {
+
+    const container = document.getElementById("cartContainer");
+    if (!container) return;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        container.innerHTML = "<h2>السلة فارغة</h2>";
+        return;
+    }
+
+    let total = 0;
+    let html = "";
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+
+        html += `
+            <div class="checkout-item">
+                ${item.name} × ${item.quantity}
+                <br>
+                ${item.price * item.quantity} ر.س
+            </div>
+        `;
+    });
+
+    html += `<div class="total">المجموع: ${total} ر.س</div>`;
+
+    container.innerHTML = html;
+}
+
+// إرسال الطلب
+function submitOrder(event) {
+    event.preventDefault();
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    orders.push({
+        items: cart,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+    localStorage.removeItem("cart");
+
+    window.location.href = "thankyou.html";
+}
+
+// تشغيل عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", function () {
+    updateCartCount();
+    loadCheckoutPage();
+});
