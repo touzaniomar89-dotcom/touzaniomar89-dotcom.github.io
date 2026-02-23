@@ -5,104 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WDZ STORE</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-body{
+
+*{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#0a0a0a;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Cairo', sans-serif;
+  background: linear-gradient(135deg, #000000, #0f0f0f, #111);
   color:white;
+  min-height:100vh;
 }
 
 /* Navbar */
+
 .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 30px;
-  background:#111;
-  border-bottom:1px solid #222;
+  padding:20px 40px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 .logo{
-  font-size:20px;
-  font-weight:bold;
+  font-size:22px;
+  font-weight:700;
   color:#00ff88;
+  letter-spacing:2px;
 }
 
 .cart-btn{
-  background:#00ff88;
-  color:black;
+  background: linear-gradient(45deg,#00ff88,#00cc66);
   border:none;
-  padding:8px 15px;
-  border-radius:6px;
-  cursor:pointer;
+  padding:10px 18px;
+  border-radius:12px;
   font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-/* Product */
+.cart-btn:hover{
+  transform:scale(1.05);
+}
+
+/* Container */
+
 .container{
   display:flex;
   justify-content:center;
   align-items:center;
   height:80vh;
+  animation:fadeIn 1.2s ease;
 }
 
+/* Product Card */
+
 .product{
-  background:#111;
-  padding:30px;
-  border-radius:15px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  border-radius:20px;
+  padding:50px;
   text-align:center;
+  box-shadow:0 0 40px rgba(0,255,120,0.08);
+  transition:0.4s;
   width:350px;
-  box-shadow:0 0 25px rgba(0,255,100,0.1);
+}
+
+.product:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 60px rgba(0,255,120,0.2);
 }
 
 .product h2{
-  margin-bottom:10px;
+  margin-bottom:20px;
+  font-size:24px;
 }
 
 .price{
   color:#00ff88;
-  font-size:18px;
-  margin:15px 0;
-}
-
-button{
-  background:#00ff88;
-  border:none;
-  padding:12px;
-  width:100%;
-  border-radius:8px;
-  cursor:pointer;
+  font-size:20px;
+  margin-bottom:30px;
   font-weight:bold;
 }
 
-button:hover{
-  background:#00cc52;
+/* Button */
+
+.buy-btn{
+  background: linear-gradient(45deg,#00ff88,#00cc66);
+  border:none;
+  padding:14px;
+  width:100%;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.buy-btn:hover{
+  transform:scale(1.05);
 }
 
 /* Footer */
+
 .footer{
   text-align:center;
   padding:20px;
-  background:#111;
-  border-top:1px solid #222;
-  font-size:13px;
+  border-top:1px solid rgba(255,255,255,0.05);
   color:#888;
+  font-size:14px;
 }
+
+/* Animation */
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="navbar">
   <div class="logo">WDZ STORE</div>
-  <button class="cart-btn" onclick="goToCheckout()">🛒 السلة</button>
+  <button class="cart-btn" onclick="goToCheckout()">
+    🛒 السلة
+  </button>
 </div>
 
 <div class="container">
   <div class="product">
     <h2>2 TSHIRT BLACK</h2>
-    <p class="price">980 ر.س</p>
-    <button onclick="orderNow()">اطلب الآن</button>
+    <div class="price">980 ر.س</div>
+    <button class="buy-btn" onclick="orderNow()">اطلب الآن</button>
   </div>
 </div>
 
@@ -138,5 +179,6 @@ function goToCheckout(){
 }
 
 </script>
+
 </body>
 </html>
