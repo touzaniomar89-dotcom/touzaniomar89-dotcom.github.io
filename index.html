@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WDZ Order</title>
+<title>WDZ STORE</title>
 
 <style>
 body{
@@ -13,29 +13,37 @@ font-family:Arial;
 text-align:center;
 padding:40px;
 }
-.box{
+
+.product-box{
 background:#111;
-padding:20px;
-border-radius:10px;
-max-width:350px;
+padding:30px;
+border-radius:12px;
+max-width:400px;
 margin:auto;
+box-shadow:0 0 20px rgba(0,255,100,0.1);
 }
-input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:6px;
-border:none;
+
+h1{
+margin-bottom:40px;
 }
+
+.price{
+color:#00ff66;
+font-size:20px;
+margin:15px 0;
+}
+
 button{
 background:#00ff66;
 border:none;
 padding:12px;
 width:100%;
-border-radius:6px;
+border-radius:8px;
 cursor:pointer;
 font-weight:bold;
+font-size:16px;
 }
+
 button:hover{
 background:#00cc52;
 }
@@ -45,46 +53,20 @@ background:#00cc52;
 
 <h1>WDZ STORE</h1>
 
-<div class="box">
+<div class="product-box">
 
-<h3>2 TSHIRT BLACK</h3>
+<h2>TSHIRT BLACK 2</h2>
+<p class="price">السعر: 980 ر.س</p>
 
-<form id="orderForm">
-<input id="name" placeholder="اسمك" required>
-<input id="phone" placeholder="رقم الهاتف" required>
-<input id="city" placeholder="المدينة" required>
-<input id="address" placeholder="العنوان" required>
-<button type="submit">تأكيد الطلب</button>
-</form>
+<button onclick="goToCheckout()">اطلب الآن</button>
 
 </div>
 
 <script>
-document.getElementById("orderForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  fetch("https://script.google.com/macros/s/AKfycbynLcGw4Otvlxt85Q-Qqc1XKkQzmW1DKdUzR_cwbvEUFkp9Dd04MkATMfTqyVLmWs7GSg/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: new URLSearchParams({
-      name: document.getElementById("name").value,
-      phone: document.getElementById("phone").value,
-      city: document.getElementById("city").value,
-      address: document.getElementById("address").value,
-      product: "2 TSHIRT BLACK"
-    })
-  })
-  .then(() => {
-    alert("✅ تم إرسال الطلب بنجاح");
-    document.getElementById("orderForm").reset();
-  })
-  .catch(error => {
-    console.log(error);
-    alert("❌ حدث خطأ");
-  });
-
-});
+function goToCheckout(){
+  window.location.href = "checkout.html";
+}
 </script>
-  
+
 </body>
 </html>
