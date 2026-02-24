@@ -11,12 +11,61 @@ function saveCart() {
 }
 
 // ==========================
+// إضافة منتج للسلة
+// ==========================
+function addToCart(name, price) {
+
+  let existing = cart.find(item => item.name === name);
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      name: name,
+      price: price,
+      quantity: 1
+    });
+  }
+
+  saveCart();
+  updateCartCount();
+  alert("تمت إضافة المنتج للسلة");
+}
+
+// ==========================
+// تحديث رقم السلة في الهيدر
+// ==========================
+function updateCartCount() {
+  const countElement = document.getElementById("cartCount");
+  if (!countElement) return;
+
+  let totalQuantity = 0;
+  cart.forEach(item => totalQuantity += item.quantity);
+
+  countElement.textContent = totalQuantity;
+}
+
+// ==========================
+// الانتقال لصفحة checkout
+// ==========================
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
+
+// ==========================
+// عرض التفاصيل (مؤقت)
+// ==========================
+function showDetails(name, image, price) {
+  alert(name + " - السعر: " + price + " ريال");
+}
+
+// ==========================
 // عرض السلة في صفحة checkout
 // ==========================
 function displayCheckout() {
 
   const container = document.getElementById("cartContainer");
-  if (!container) return; // لو مو في صفحة checkout
+  if (!container) return;
 
   container.innerHTML = "";
 
@@ -52,31 +101,17 @@ function displayCheckout() {
 function submitOrder(event) {
   event.preventDefault();
 
-  const name = document.getElementById("customerName").value;
-  const phone = document.getElementById("customerPhone").value;
-  const address = document.getElementById("customerAddress").value;
-
   if (cart.length === 0) {
     alert("السلة فارغة!");
     return;
   }
 
-  const order = {
-    customer: { name, phone, address },
-    items: cart,
-    date: new Date()
-  };
-
-  console.log("Order Submitted:", order);
-
-  // تفريغ السلة
   localStorage.removeItem("cart");
-
-  // الانتقال لصفحة الشكر
   window.location.href = "thankyou.html";
 }
 
 // ==========================
-// تشغيل العرض عند تحميل الصفحة
+// تشغيل عند تحميل الصفحة
 // ==========================
+updateCartCount();
 displayCheckout();
